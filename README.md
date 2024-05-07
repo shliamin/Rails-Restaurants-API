@@ -6,8 +6,8 @@ The Restaurants API provides a structured way to access and manage data related 
 ## Installation
 To set up the project locally:
 ```bach
-git clone https://github.com/shliamin/restaurants-api
-cd restaurants-api
+git clone https://github.com/shliamin/Rails-Restaurants-API
+cd Rails-Restaurants-API
 bundle install
 rails db:create db:migrate
 rails server
