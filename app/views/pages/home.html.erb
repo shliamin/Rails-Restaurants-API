@@ -1,2 +1,16 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<!-- app/views/pages/home.html.erb -->
+
+<div class="box">
+    <h3>All Restaurants:</h3>
+    <div class="restaurant-list">
+    <ul>
+        <% @restaurants.each do |restaurant| %>
+        <li class="restaurant-item">
+            <strong><%= restaurant.name %></strong><br>
+            Address: <%= restaurant.address %><br>
+            Owner: <%= restaurant.user.email if restaurant.user %>
+        </li>
+        <% end %>
+    </ul>
+    </div>
+<div class="restaurant-list">
