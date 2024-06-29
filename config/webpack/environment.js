@@ -1,17 +1,36 @@
-const { environment } = require('@rails/webpacker')
+const { environment } = require('@rails/webpacker');
+const webpack = require('webpack');
 
-const webpack = require('webpack')
+environment.plugins.append('Provide', new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+  Popper: ['popper.js', 'default']
+}));
 
-// Preventing Babel from transpiling NodeModules packages
-environment.loaders.delete('nodeModules');
+environment.loaders.append('sass', {
+  test: /\.scss$/,
+  use: [
+    'style-loader',
+    'css-loader',
+    'postcss-loader',
+    {
+      loader: 'sass-loader',
+      options: {
+        implementation: require('sass'),
+        sassOptions: {
+          fiber: false
+        }
+      }
+    }
+  ]
+});
 
-// Bootstrap 4 has a dependency over jQuery & Popper.js:
-environment.plugins.prepend('Provide',
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-    Popper: ['popper.js', 'default']
-  })
-)
+environment.config.merge({
+  node: {
+    __dirname: true,
+    __filename: true,
+    global: true,
+  }
+});
 
-module.exports = environment
+module.exports = environment;
